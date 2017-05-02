@@ -1,11 +1,11 @@
 package cracking.datastructures;
 
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
 
-class MyLinkedListTest {
+public class MyLinkedListTest {
 
     @Test
     public void test_constructor_initialValue() {
@@ -43,20 +43,20 @@ class MyLinkedListTest {
         assertEquals("tail", list.valueAt(3));
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void test_add_invalidPosition_populatedList() {
         MyLinkedList<String> list = new MyLinkedList<>();
         list.add("head");
         list.add("neck");
         list.add("tail");
 
-        assertThrows(RuntimeException.class, ()->{ list.add("body", 5); });
+        list.add("body", 5);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void test_add_invalidPosition_emptyList() {
         MyLinkedList<String> list = new MyLinkedList<>();
-        assertThrows(RuntimeException.class, ()->{ list.add("body", 1); });
+        list.add("body", 1);
     }
 
     @Test
@@ -71,7 +71,6 @@ class MyLinkedListTest {
         assertEquals("neck", list.valueAt(1));
         assertEquals("tail", list.valueAt(2));
 
-
         list.removeAt(1);
         assertEquals(2, list.size());
         assertEquals("head", list.valueAt(0));
@@ -85,16 +84,16 @@ class MyLinkedListTest {
         assertEquals(0, list.size());
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void test_removeAt_emptyList() {
         MyLinkedList<String> list = new MyLinkedList<>();
-        assertThrows(RuntimeException.class, ()->{list.removeAt(0);});
+        list.removeAt(0);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void test_valueAt_invalidIndex() {
         MyLinkedList<String> list = new MyLinkedList<>();
-        assertThrows(RuntimeException.class, ()->{list.valueAt(0);});
+        list.valueAt(0);
     }
 
     @Test
@@ -121,10 +120,10 @@ class MyLinkedListTest {
         assertEquals(0, list.size());
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void test_removeHead_emptyList() {
         MyLinkedList<String> list = new MyLinkedList<>();
-        assertThrows(RuntimeException.class, ()->{ list.removeHead(); });
+        list.removeHead();
     }
 
     @Test
@@ -152,9 +151,9 @@ class MyLinkedListTest {
         assertEquals(0, list.size());
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void test_removeTail_emptyList() {
         MyLinkedList<String> list = new MyLinkedList<>();
-        assertThrows(RuntimeException.class, ()->{ list.removeTail(); });
+        list.removeTail();
     }
 }
