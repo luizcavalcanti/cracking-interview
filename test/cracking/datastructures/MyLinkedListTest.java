@@ -4,6 +4,8 @@ package cracking.datastructures;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class MyLinkedListTest {
 
@@ -12,148 +14,60 @@ public class MyLinkedListTest {
         MyLinkedList<String> list = new MyLinkedList<>("head");
 
         assertEquals(1, list.size());
-        assertEquals("head", list.valueAt(0));
+        assertTrue(list.contains("head"));
     }
 
     @Test
-    public void test_add_noPosition() {
+    public void test_insert() {
         MyLinkedList<String> list = new MyLinkedList<>();
-        list.add("head");
-        list.add("neck");
-        list.add("tail");
+        list.insert("head");
+        list.insert("neck");
+        list.insert("tail");
 
         assertEquals(3, list.size());
-        assertEquals("head", list.valueAt(0));
-        assertEquals("neck", list.valueAt(1));
-        assertEquals("tail", list.valueAt(2));
+        assertTrue(list.contains("head"));
+        assertTrue(list.contains("neck"));
+        assertTrue(list.contains("tail"));
+        assertFalse(list.contains("body"));
     }
 
     @Test
-    public void test_add_validPosition() {
+    public void test_delete_populatedList() {
         MyLinkedList<String> list = new MyLinkedList<>();
-        list.add("head");
-        list.add("neck");
-        list.add("tail");
-
-        assertEquals("tail", list.valueAt(2));
-
-        list.add("body", 2);
-
-        assertEquals("body", list.valueAt(2));
-        assertEquals("tail", list.valueAt(3));
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void test_add_invalidPosition_populatedList() {
-        MyLinkedList<String> list = new MyLinkedList<>();
-        list.add("head");
-        list.add("neck");
-        list.add("tail");
-
-        list.add("body", 5);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void test_add_invalidPosition_emptyList() {
-        MyLinkedList<String> list = new MyLinkedList<>();
-        list.add("body", 1);
-    }
-
-    @Test
-    public void test_removeAt_populatedList() {
-        MyLinkedList<String> list = new MyLinkedList<>();
-        list.add("head");
-        list.add("neck");
-        list.add("tail");
+        list.insert("head");
+        list.insert("neck");
+        list.insert("tail");
 
         assertEquals(3, list.size());
-        assertEquals("head", list.valueAt(0));
-        assertEquals("neck", list.valueAt(1));
-        assertEquals("tail", list.valueAt(2));
+        assertTrue(list.contains("head"));
+        assertTrue(list.contains("neck"));
+        assertTrue(list.contains("tail"));
 
-        list.removeAt(1);
+        assertFalse(list.delete("body"));
+
+        assertTrue(list.delete("neck"));
         assertEquals(2, list.size());
-        assertEquals("head", list.valueAt(0));
-        assertEquals("tail", list.valueAt(1));
+        assertTrue(list.contains("head"));
+        assertFalse(list.contains("neck"));
+        assertTrue(list.contains("tail"));
 
-        list.removeAt(0);
+        assertTrue(list.delete("tail"));
         assertEquals(1, list.size());
-        assertEquals("tail", list.valueAt(0));
+        assertTrue(list.contains("head"));
+        assertFalse(list.contains("neck"));
+        assertFalse(list.contains("tail"));
 
-        list.removeAt(0);
+        assertTrue(list.delete("head"));
         assertEquals(0, list.size());
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void test_removeAt_emptyList() {
-        MyLinkedList<String> list = new MyLinkedList<>();
-        list.removeAt(0);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void test_valueAt_invalidIndex() {
-        MyLinkedList<String> list = new MyLinkedList<>();
-        list.valueAt(0);
+        assertFalse(list.contains("head"));
+        assertFalse(list.contains("neck"));
+        assertFalse(list.contains("tail"));
     }
 
     @Test
-    public void test_removeHead_populatedList() {
+    public void test_delete_emptyList() {
         MyLinkedList<String> list = new MyLinkedList<>();
-        list.add("head");
-        list.add("neck");
-        list.add("tail");
-        assertEquals(3, list.size());
-        assertEquals("head", list.valueAt(0));
-        assertEquals("neck", list.valueAt(1));
-        assertEquals("tail", list.valueAt(2));
-
-        list.removeHead();
-        assertEquals(2, list.size());
-        assertEquals("neck", list.valueAt(0));
-        assertEquals("tail", list.valueAt(1));
-
-        list.removeHead();
-        assertEquals(1, list.size());
-        assertEquals("tail", list.valueAt(0));
-
-        list.removeHead();
-        assertEquals(0, list.size());
+        assertFalse(list.delete("tail"));
     }
 
-    @Test(expected = RuntimeException.class)
-    public void test_removeHead_emptyList() {
-        MyLinkedList<String> list = new MyLinkedList<>();
-        list.removeHead();
-    }
-
-    @Test
-    public void test_removeTail_populatedList() {
-        MyLinkedList<String> list = new MyLinkedList<>();
-        list.add("head");
-        list.add("neck");
-        list.add("tail");
-
-        assertEquals(3, list.size());
-        assertEquals("head", list.valueAt(0));
-        assertEquals("neck", list.valueAt(1));
-        assertEquals("tail", list.valueAt(2));
-
-        list.removeTail();
-        assertEquals(2, list.size());
-        assertEquals("head", list.valueAt(0));
-        assertEquals("neck", list.valueAt(1));
-
-        list.removeTail();
-        assertEquals(1, list.size());
-        assertEquals("head", list.valueAt(0));
-
-        list.removeTail();
-        assertEquals(0, list.size());
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void test_removeTail_emptyList() {
-        MyLinkedList<String> list = new MyLinkedList<>();
-        list.removeTail();
-    }
 }
