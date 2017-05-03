@@ -3,9 +3,7 @@ package cracking.datastructures;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class MyLinkedListTest {
 
@@ -68,6 +66,21 @@ public class MyLinkedListTest {
     public void test_delete_emptyList() {
         MyLinkedList<String> list = new MyLinkedList<>();
         assertFalse(list.delete("tail"));
+    }
+
+    @Test
+    public void test_search_existent() {
+        MyLinkedList<String> list = new MyLinkedList<>();
+        list.insert("head");
+        Node<String> node = list.search("head");
+        assertNotNull(node);
+        assertEquals("head", node.getValue());
+    }
+
+    @Test
+    public void test_search_nonexistent() {
+        MyLinkedList<String> list = new MyLinkedList<>();
+        assertNull(list.search("head"));
     }
 
 }

@@ -53,7 +53,7 @@ public class MyLinkedList<T> {
         return search(value) != null;
     }
 
-    private Node<T> search(T value) {
+    public Node<T> search(T value) {
         Node<T> currentNode = this.head;
         while (currentNode != null) {
             if (currentNode.getValue().equals(value))
