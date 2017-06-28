@@ -2,7 +2,7 @@ package cracking.datastructures;
 
 public class MyLinkedList<T> {
 
-    private Node<T> head;
+    private ListNode<T> head;
     private int nodeCount;
 
     public MyLinkedList() {
@@ -13,7 +13,7 @@ public class MyLinkedList<T> {
     }
 
     public void insert(T value) {
-        Node<T> newNode = new Node<>(value);
+        ListNode<T> newNode = new ListNode<>(value);
 
         if (this.head != null)
             this.head.setPrevious(newNode);
@@ -28,7 +28,7 @@ public class MyLinkedList<T> {
     }
 
     public boolean delete(T value) {
-        Node<T> node = search(value);
+        ListNode<T> node = search(value);
         if (node != null) {
             if (node == this.head) {
                 this.head = node.getNext();
@@ -53,8 +53,8 @@ public class MyLinkedList<T> {
         return search(value) != null;
     }
 
-    public Node<T> search(T value) {
-        Node<T> currentNode = this.head;
+    public ListNode<T> search(T value) {
+        ListNode<T> currentNode = this.head;
         while (currentNode != null) {
             if (currentNode.getValue().equals(value))
                 return currentNode;
@@ -65,13 +65,13 @@ public class MyLinkedList<T> {
 
 }
 
-class Node<T> {
+class ListNode<T> {
 
     private T value;
-    private Node<T> next;
-    private Node<T> previous;
+    private ListNode<T> next;
+    private ListNode<T> previous;
 
-    public Node(T value) {
+    public ListNode(T value) {
         this.value = value;
     }
 
@@ -79,19 +79,19 @@ class Node<T> {
         return this.value;
     }
 
-    public Node<T> getNext() {
+    public ListNode<T> getNext() {
         return this.next;
     }
 
-    public void setNext(Node<T> next) {
+    public void setNext(ListNode<T> next) {
         this.next = next;
     }
 
-    public void setPrevious(Node<T> previous) {
+    public void setPrevious(ListNode<T> previous) {
         this.previous = previous;
     }
 
-    public Node<T> getPrevious() {
+    public ListNode<T> getPrevious() {
         return this.previous;
     }
 

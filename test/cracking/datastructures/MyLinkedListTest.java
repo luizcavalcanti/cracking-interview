@@ -72,7 +72,7 @@ public class MyLinkedListTest {
     public void test_search_existent() {
         MyLinkedList<String> list = new MyLinkedList<>();
         list.insert("head");
-        Node<String> node = list.search("head");
+        ListNode<String> node = list.search("head");
         assertNotNull(node);
         assertEquals("head", node.getValue());
     }

@@ -33,7 +33,7 @@ public class MyHashTable<K,V> {
         MyLinkedList<TableEntry<K,V>> list = table[hash(key)];
         TableEntry<K,V> entry = new TableEntry<>();
         entry.key = key;
-        Node<TableEntry<K,V>> node = list.search(entry);
+        ListNode<TableEntry<K,V>> node = list.search(entry);
         return node == null ? null : node.getValue().value;
     }
 
